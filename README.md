@@ -1,4 +1,4 @@
-# crypto_converter
+# crypto_final
 
 ## Project setup
 ```
