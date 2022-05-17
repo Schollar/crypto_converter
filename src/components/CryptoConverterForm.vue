@@ -10,13 +10,18 @@
         class="select"
       ></v-select>
     </form>
-    <p>{{ selected.priceUsd }}</p>
+    <p>Price USD: {{ selected.priceUsd }}</p>
+    <currency-converter-selector></currency-converter-selector>
   </div>
 </template>
 
 <script>
+import CurrencyConverterSelector from "./CurrencyConverterSelector.vue";
 export default {
   name: "crypto-converter",
+  components: {
+    CurrencyConverterSelector,
+  },
   mounted() {
     this.get_crypto_data();
   },
@@ -44,7 +49,7 @@ export default {
   data() {
     return {
       crypto_data: undefined,
-      selected: "Select a Coin first!",
+      selected: "",
     };
   },
 };
