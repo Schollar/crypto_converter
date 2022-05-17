@@ -1,15 +1,16 @@
 <template>
   <div>
-    <form @submit.prevent="submit">
+    <form class="crypto_form">
       <v-select
         return-object
         :items="crypto_data"
         item-text="name"
         label="Standard"
+        v-model="selected"
+        class="select"
       ></v-select>
-      <v-btn class="mr-4" type="submit" :disabled="invalid"> submit </v-btn>
-      <v-btn @click="clear"> clear </v-btn>
     </form>
+    <p>{{ selected.priceUsd }}</p>
   </div>
 </template>
 
@@ -42,17 +43,15 @@ export default {
   },
   data() {
     return {
-      items: [
-        { name: "lol", price: 1 },
-        { name: "poo", price: 2 },
-        { name: "l", price: 3 },
-        { name: "lo", price: 4 },
-      ],
       crypto_data: undefined,
+      selected: "Select a Coin first!",
     };
   },
 };
 </script>
 
 <style scoped>
+.crypto_form {
+  border: 1px solid black;
+}
 </style>
