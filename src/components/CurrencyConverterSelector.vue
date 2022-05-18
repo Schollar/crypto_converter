@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!-- TO DO: use https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json to grab list exchange rate for and make a list of maybe top 10 currencies to convert to -->
     <v-select
       :items="currencies"
       label="Standard"
       v-model="selected"
       class="select"
+      @input="change_selection()"
     ></v-select>
   </div>
 </template>
@@ -13,16 +13,27 @@
 <script>
 export default {
   name: "currency-converter-selector",
+  props: {
+    currencies: Array,
+  },
   data() {
     return {
       currency_data: undefined,
-      currencies: ["CAD", "EUR", "GPB"],
+      selected: "",
     };
   },
   mounted() {
     this.get_currency_data();
   },
   methods: {
+    change_selection() {
+      let selected_currency = {
+        name: this.selected,
+        price: this.currency_data[this.selected.toLowerCase()],
+      };
+      this.$emit("input", selected_currency);
+    },
+
     get_currency_data() {
       // Grabbing The prices of other currencies using USD as the base
       this.$axios
@@ -32,7 +43,6 @@ export default {
         })
         // Setting character tasks list to data sent back
         .then((response) => {
-          response.forEach();
           this.currency_data = response.data.usd;
         })
         .catch((error) => {

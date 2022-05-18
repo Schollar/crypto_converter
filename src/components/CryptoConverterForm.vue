@@ -11,7 +11,15 @@
       ></v-select>
     </form>
     <p>Price USD: {{ selected.priceUsd }}</p>
-    <currency-converter-selector></currency-converter-selector>
+    <currency-converter-selector
+      :currencies="currencies"
+      @change="selection_changed"
+      v-model="selected_currency"
+    ></currency-converter-selector>
+    <p>
+      Price {{ selected_currency }}:
+      {{ selected }}
+    </p>
   </div>
 </template>
 
@@ -26,6 +34,9 @@ export default {
     this.get_crypto_data();
   },
   methods: {
+    selection_changed() {
+      console.log("Month changed. Selected ID: ", this.selectedMonth);
+    },
     get_crypto_data() {
       // Grabbing the availible coins and storing them in our data
       this.$axios
@@ -50,6 +61,8 @@ export default {
     return {
       crypto_data: undefined,
       selected: "",
+      currencies: ["CAD", "EUR", "GPB"],
+      selected_currency: null,
     };
   },
 };
