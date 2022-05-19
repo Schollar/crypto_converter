@@ -5,6 +5,7 @@
         return-object
         :items="crypto_data"
         item-text="name"
+        v-on:input="formatPrice()"
         label="Standard"
         v-model="selected"
         class="select"
@@ -13,12 +14,12 @@
     <p>Price USD: {{ selected.priceUsd }}</p>
     <currency-converter-selector
       :currencies="currencies"
-      @change="selection_changed"
+      @input="selection_changed"
       v-model="selected_currency"
     ></currency-converter-selector>
     <p>
-      Price {{ selected_currency }}:
-      {{ selected }}
+      Price {{ selected_currency.name }}:
+      {{ selected.priceUsd * selected_currency.price }}
     </p>
   </div>
 </template>
@@ -34,8 +35,12 @@ export default {
     this.get_crypto_data();
   },
   methods: {
-    selection_changed() {
-      console.log("Month changed. Selected ID: ", this.selectedMonth);
+    selection_changed(value) {
+      console.log(value);
+    },
+    formatPrice: function () {
+      let num = Number(this.selected["priceUsd"]);
+      this.selected["priceUsd"] = num.toFixed(4);
     },
     get_crypto_data() {
       // Grabbing the availible coins and storing them in our data
@@ -60,9 +65,14 @@ export default {
   data() {
     return {
       crypto_data: undefined,
-      selected: "",
-      currencies: ["CAD", "EUR", "GPB"],
-      selected_currency: null,
+      selected: {
+        priceUsd: 0,
+      },
+      currencies: ["CAD", "EUR", "GBP"],
+      selected_currency: {
+        name: "You must pick a currency first!",
+        price: "",
+      },
     };
   },
 };
