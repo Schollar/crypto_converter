@@ -1,10 +1,7 @@
 <template>
   <div>
     <h1>Coin Price</h1>
-    <p>
-      Check prices of popular crypto coins and convert them to your local
-      currency.
-    </p>
+    <p>Check prices of popular crypto in your local currency.</p>
   </div>
 </template>
 

@@ -5,21 +5,21 @@
         return-object
         :items="crypto_data"
         item-text="name"
-        v-on:input="formatPrice()"
+        v-on:input="formatUsdPrice()"
         label="Standard"
         v-model="selected"
         class="select"
       ></v-select>
     </form>
-    <p>Price USD: {{ selected.priceUsd }}</p>
+    <p>Price USD: ${{ selected.priceUsd }}</p>
     <currency-converter-selector
       :currencies="currencies"
       @input="selection_changed"
       v-model="selected_currency"
     ></currency-converter-selector>
     <p>
-      Price {{ selected_currency.name }}:
-      {{ selected.priceUsd * selected_currency.price }}
+      <!-- TODO: SHOW CONVERTED PRICE TO 4 DECIMAL PLACES -->
+      Price {{ selected_currency.name }}: ${{ getconvertedPrice() }}
     </p>
   </div>
 </template>
@@ -38,9 +38,14 @@ export default {
     selection_changed(value) {
       console.log(value);
     },
-    formatPrice: function () {
+    formatUsdPrice: function () {
       let num = Number(this.selected["priceUsd"]);
       this.selected["priceUsd"] = num.toFixed(4);
+    },
+    getconvertedPrice() {
+      let price = this.selected["priceUsd"] * this.selected_currency["price"];
+      price = price.toFixed(4);
+      return price;
     },
     get_crypto_data() {
       // Grabbing the availible coins and storing them in our data
@@ -57,7 +62,7 @@ export default {
           error;
           this.$root.$emit(
             "error_message",
-            "Something went wrong getting characters tasks"
+            "Something went wrong. Please try again"
           );
         });
     },
@@ -65,6 +70,7 @@ export default {
   data() {
     return {
       crypto_data: undefined,
+      converted_price: 0,
       selected: {
         priceUsd: 0,
       },
