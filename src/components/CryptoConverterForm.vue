@@ -71,7 +71,6 @@ export default {
   data() {
     return {
       crypto_data: undefined,
-      converted_price: 0,
       selected: {
         priceUsd: 0,
       },
