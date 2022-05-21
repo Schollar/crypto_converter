@@ -1,19 +1,17 @@
 <template>
-  <div>
+  <div class="form_container">
     <form class="crypto_form">
       <v-select
         return-object
         :items="crypto_data"
         item-text="name"
-        v-on:input="formatUsdPrice()"
         label="Select a coin"
         v-model="selected"
         class="select"
       ></v-select>
-      <p>Price USD: ${{ selected.priceUsd }}</p>
+      <p>Price USD: ${{ formatUsdPrice() }}</p>
       <currency-converter-selector
         :currencies="currencies"
-        @input="selection_changed"
         v-model="selected_currency"
       ></currency-converter-selector>
       <p>Price {{ selected_currency.name }}: ${{ getconvertedPrice() }}</p>
@@ -32,15 +30,17 @@ export default {
     this.get_crypto_data();
   },
   methods: {
-    selection_changed(value) {
-      console.log(value);
-    },
-    formatUsdPrice: function () {
-      let num = Number(this.selected["priceUsd"]);
-      this.selected["priceUsd"] = num.toFixed(4);
+    formatUsdPrice() {
+      if (this.selected.priceUsd === 0) {
+        return 0;
+      } else {
+        let num = Number(this.selected["priceUsd"]);
+        num = num.toFixed(4);
+        return num;
+      }
     },
     getconvertedPrice() {
-      if (this.converted_price === 0) {
+      if (this.selected_currency.price === 0) {
         return 0;
       } else {
         let price = this.selected["priceUsd"] * this.selected_currency["price"];
@@ -78,7 +78,7 @@ export default {
       currencies: ["CAD", "EUR", "GBP"],
       selected_currency: {
         name: "",
-        price: "",
+        price: 0,
       },
     };
   },
@@ -86,6 +86,12 @@ export default {
 </script>
 
 <style scoped>
+.form_container {
+  display: grid;
+  place-items: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
 .crypto_form {
   padding: 20px;
   border: 1px solid black;
