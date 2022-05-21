@@ -6,21 +6,18 @@
         :items="crypto_data"
         item-text="name"
         v-on:input="formatUsdPrice()"
-        label="Standard"
+        label="Select a coin"
         v-model="selected"
         class="select"
       ></v-select>
+      <p>Price USD: ${{ selected.priceUsd }}</p>
+      <currency-converter-selector
+        :currencies="currencies"
+        @input="selection_changed"
+        v-model="selected_currency"
+      ></currency-converter-selector>
+      <p>Price {{ selected_currency.name }}: ${{ getconvertedPrice() }}</p>
     </form>
-    <p>Price USD: ${{ selected.priceUsd }}</p>
-    <currency-converter-selector
-      :currencies="currencies"
-      @input="selection_changed"
-      v-model="selected_currency"
-    ></currency-converter-selector>
-    <p>
-      <!-- TODO: SHOW CONVERTED PRICE TO 4 DECIMAL PLACES -->
-      Price {{ selected_currency.name }}: ${{ getconvertedPrice() }}
-    </p>
   </div>
 </template>
 
@@ -43,9 +40,13 @@ export default {
       this.selected["priceUsd"] = num.toFixed(4);
     },
     getconvertedPrice() {
-      let price = this.selected["priceUsd"] * this.selected_currency["price"];
-      price = price.toFixed(4);
-      return price;
+      if (this.converted_price === 0) {
+        return 0;
+      } else {
+        let price = this.selected["priceUsd"] * this.selected_currency["price"];
+        price = price.toFixed(4);
+        return price;
+      }
     },
     get_crypto_data() {
       // Grabbing the availible coins and storing them in our data
@@ -76,7 +77,7 @@ export default {
       },
       currencies: ["CAD", "EUR", "GBP"],
       selected_currency: {
-        name: "You must pick a currency first!",
+        name: "",
         price: "",
       },
     };
@@ -86,6 +87,8 @@ export default {
 
 <style scoped>
 .crypto_form {
+  padding: 20px;
   border: 1px solid black;
+  border-radius: 15px;
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <v-select
       :items="currencies"
-      label="Standard"
+      label="Select a currency"
       v-model="selected"
       class="select"
       @input="change_selection()"
@@ -49,7 +49,7 @@ export default {
           error;
           this.$root.$emit(
             "error_message",
-            "Something went wrong getting characters tasks"
+            "Something went wrong please try again"
           );
         });
     },
@@ -58,4 +58,7 @@ export default {
 </script>
 
 <style scoped>
+.select {
+  width: 35%;
+}
 </style>
