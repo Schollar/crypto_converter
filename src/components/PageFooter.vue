@@ -18,4 +18,7 @@ export default {
 </script>
 
 <style scoped>
+.footer_container {
+  color: #72b01d;
+}
 </style>

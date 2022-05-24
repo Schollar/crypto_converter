@@ -1,14 +1,19 @@
 <template>
   <div class="form_container">
     <form class="crypto_form">
-      <v-select
-        return-object
-        :items="crypto_data"
-        item-text="name"
-        label="Select a coin"
-        v-model="selected"
-        class="select"
-      ></v-select>
+      <div id="text_color">
+        <v-select
+          item-color="orange"
+          color="orange"
+          id="selection"
+          return-object
+          :items="crypto_data"
+          item-text="name"
+          label="Select a coin"
+          v-model="selected"
+          class="select"
+        ></v-select>
+      </div>
       <p>Price USD: ${{ formatUsdPrice() }}</p>
       <currency-converter-selector
         :currencies="currencies"
@@ -90,10 +95,21 @@ export default {
   place-items: center;
   margin-top: 10%;
   margin-bottom: 10%;
+  color: #72b01d;
+}
+#text_color >>> .v-select__selection {
+  color: yellow !important;
+}
+.v-menu__content >>> .v-list-item__content {
+  color: purple !important;
+}
+.v-list-item__content {
 }
 .crypto_form {
-  padding: 20px;
-  border: 1px solid black;
+  padding: 60px;
+  border: 1px solid #72b01d;
+  background-color: #3f7d20;
   border-radius: 15px;
+  width: 65%;
 }
 </style>
