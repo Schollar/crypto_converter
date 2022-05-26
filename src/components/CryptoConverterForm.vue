@@ -12,7 +12,11 @@
           label="Select a coin"
           v-model="selected"
           class="select"
-        ></v-select>
+        >
+          <template #item="{ item }">
+            <span style="color: red">{{ item.name }}</span>
+          </template></v-select
+        >
       </div>
       <p>Price USD: ${{ formatUsdPrice() }}</p>
       <currency-converter-selector
@@ -100,10 +104,11 @@ export default {
 #text_color >>> .v-select__selection {
   color: yellow !important;
 }
-.v-menu__content >>> .v-list-item__content {
+#text_color >>> .v-list-item__content {
   color: purple !important;
 }
 .v-list-item__content {
+  color: purple !important;
 }
 .crypto_form {
   padding: 60px;
