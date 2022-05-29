@@ -1,11 +1,12 @@
 <template>
   <div class="form_container">
     <form class="crypto_form">
-      <div id="text_color">
+      <div class="text_color">
         <v-select
-          item-color="orange"
-          color="orange"
+          item-color="#90ffdc"
+          color="#90ffdc"
           id="selection"
+          dark
           return-object
           :items="crypto_data"
           item-text="name"
@@ -14,7 +15,7 @@
           class="select"
         >
           <template #item="{ item }">
-            <span style="color: red">{{ item.name }}</span>
+            <span style="color: #124559">{{ item.name }}</span>
           </template></v-select
         >
       </div>
@@ -99,22 +100,18 @@ export default {
   place-items: center;
   margin-top: 10%;
   margin-bottom: 10%;
-  color: #72b01d;
+  color: #90ffdc;
 }
-#text_color >>> .v-select__selection {
-  color: yellow !important;
+.text_color >>> .v-select__selection {
+  color: #90ffdc !important;
 }
-#text_color >>> .v-list-item__content {
-  color: purple !important;
-}
-.v-list-item__content {
-  color: purple !important;
-}
+
 .crypto_form {
   padding: 60px;
-  border: 1px solid #72b01d;
-  background-color: #3f7d20;
+  border: 1px solid #01161e;
+  background-color: #124559;
   border-radius: 15px;
   width: 65%;
+  box-shadow: -1px 1px 5px 3px rgba(0, 0, 0, 0.75);
 }
 </style>

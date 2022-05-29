@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="text_color">
     <v-select
       :items="currencies"
+      item-color="#90ffdc"
+      color="#90ffdc"
+      dark
       label="Select a currency"
       v-model="selected"
       class="select"
@@ -57,5 +60,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.text_color >>> .v-select__selection {
+  color: #124559 !important;
+}
+.v-list .v-list-item--active {
+  background-color: #90ffdc !important;
+}
+.v-list .v-list-item--active .v-list-item__title {
+  color: #124559 !important;
+}
 </style>

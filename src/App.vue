@@ -29,6 +29,6 @@ export default {
   justify-items: center;
   text-align: center;
   position: relative;
-  background-color: #454955;
+  background-color: #01161e;
 }
 </style>

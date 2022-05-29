@@ -14,6 +14,6 @@ export default {
 <style lang="scss" scoped>
 .heading_container {
   margin-top: 15%;
-  color: #72b01d;
+  color: #598392;
 }
 </style>
