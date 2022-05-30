@@ -40,6 +40,7 @@ export default {
     this.get_crypto_data();
   },
   methods: {
+    // Formatting the price to be fixed to 4 decimal places and returning it, if number is 0 we just return 0
     formatUsdPrice() {
       if (this.selected.priceUsd === 0) {
         return 0;
@@ -49,6 +50,7 @@ export default {
         return num;
       }
     },
+    // Formatting the price to be fixed to 4 decimal places and returning it, if number is 0 we just return 0
     getconvertedPrice() {
       if (this.selected_currency.price === 0) {
         return 0;
@@ -65,7 +67,7 @@ export default {
           url: `https://api.coincap.io/v2/assets`,
           method: "GET",
         })
-        // Setting character tasks list to data sent back
+        // Setting our crypto data variable to the response back, a giant array of objects
         .then((response) => {
           this.crypto_data = response.data.data;
         })
@@ -79,6 +81,7 @@ export default {
     },
   },
   data() {
+    // Setting up some initial variables, objects and arrays to use
     return {
       crypto_data: undefined,
       selected: {

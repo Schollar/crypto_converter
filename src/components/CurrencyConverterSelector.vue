@@ -29,6 +29,7 @@ export default {
     this.get_currency_data();
   },
   methods: {
+    // When changing a selection we set a variable and emit it to the parent.
     change_selection() {
       let selected_currency = {
         name: this.selected,
@@ -44,7 +45,7 @@ export default {
           url: `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json`,
           method: "GET",
         })
-        // Setting character tasks list to data sent back
+        // Setting a variable already setup to the data returned
         .then((response) => {
           this.currency_data = response.data.usd;
         })
