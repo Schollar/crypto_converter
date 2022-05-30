@@ -21,7 +21,8 @@ export default {
   color: #598392;
   font-family: "Lato", sans-serif;
   > h1 {
-    font-size: 3rem;
+    font-family: "Lobster", cursive;
+    font-size: 3.5rem;
   }
   > p {
     max-width: 80%;

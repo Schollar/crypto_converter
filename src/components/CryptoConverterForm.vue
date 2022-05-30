@@ -111,7 +111,7 @@ export default {
   border: 1px solid #01161e;
   background-color: #124559;
   border-radius: 15px;
-  width: 65%;
+  width: 85%;
   box-shadow: -1px 1px 5px 3px rgba(0, 0, 0, 0.75);
 }
 </style>
