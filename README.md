@@ -17,4 +17,4 @@ To grab the currency rate data I used [this](https://github.com/fawazahmed0/curr
 
 ## License
 
-Coin Price is available under the MIT license. See the [HERE](LICENSE.MIT)for more info.
+Coin Price is available under the MIT license. See the [HERE](LICENSE.MIT) for more info.
